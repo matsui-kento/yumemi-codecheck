@@ -27,14 +27,29 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="qQu-Q2-AwJ">
-                                        <rect key="frame" x="0.0" y="24.5" width="414" height="43.5"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="RepositoryTableViewCell" id="qQu-Q2-AwJ" customClass="RepositoryTableViewCell" customModule="iOSEngineerCodeCheck" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="24.5" width="414" height="43"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qQu-Q2-AwJ" id="TTz-T0-k02">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="Kz5-6G-rBR">
+                                                    <rect key="frame" x="20" y="11" width="374" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Kz5-6G-rBR" firstAttribute="leading" secondItem="TTz-T0-k02" secondAttribute="leadingMargin" id="Hjf-2e-c7j"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="Kz5-6G-rBR" secondAttribute="trailing" id="Iw3-WB-rrg"/>
+                                                <constraint firstItem="Kz5-6G-rBR" firstAttribute="top" secondItem="TTz-T0-k02" secondAttribute="topMargin" id="rmo-to-HNM"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="Kz5-6G-rBR" secondAttribute="bottom" id="wJ5-1U-Oep"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="fullNameLabel" destination="Kz5-6G-rBR" id="8oE-2d-mwv"/>
                                             <segue destination="AHY-RL-7mG" kind="showDetail" identifier="toDetailVC" id="aNp-Ot-WgA"/>
                                         </connections>
                                     </tableViewCell>

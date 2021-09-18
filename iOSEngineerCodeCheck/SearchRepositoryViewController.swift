@@ -8,6 +8,7 @@
 
 import UIKit
 import RxSwift
+import RxCocoa
 
 class SearchRepositoryViewController: UIViewController {
     
@@ -15,13 +16,6 @@ class SearchRepositoryViewController: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     private let disposeBag = DisposeBag()
     private var repositoryListVM: RepositoryListViewModel!
-    
-    var repository: [[String: Any]]=[]
-    
-    var task: URLSessionTask?
-    var word: String!
-    var url: String!
-    var index: Int!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,23 +55,23 @@ class SearchRepositoryViewController: UIViewController {
 extension SearchRepositoryViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return repository.count
+        return repositoryListVM.repositoryVMList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        let rp = repository[indexPath.row]
-        cell.textLabel?.text = rp["full_name"] as? String ?? ""
-        cell.detailTextLabel?.text = rp["language"] as? String ?? ""
-        cell.tag = indexPath.row
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // 画面遷移時に呼ばれる
-        index = indexPath.row
-        performSegue(withIdentifier: "toDetailVC", sender: self)
         
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "RepositoryTableViewCell", for: indexPath) as? RepositoryTableViewCell else {
+            fatalError("RepositoryTableViewCell is not found")
+        }
+        
+        let repositoryVM = repositoryListVM.repositoryAt(indexPath.row)
+        
+        repositoryVM.full_name
+            .asDriver(onErrorJustReturn: "")
+            .drive(cell.fullNameLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        return cell
     }
     
 }
