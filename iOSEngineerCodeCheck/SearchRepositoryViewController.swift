@@ -21,6 +21,9 @@ class SearchRepositoryViewController: UIViewController {
         super.viewDidLoad()
         
         searchBar.delegate = self
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.keyboardDismissMode = .onDrag
     }
     
     private func searchRepository(by word: String) {
@@ -54,8 +57,12 @@ class SearchRepositoryViewController: UIViewController {
 
 extension SearchRepositoryViewController: UITableViewDelegate, UITableViewDataSource {
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return repositoryListVM.repositoryVMList.count
+        return self.repositoryListVM == nil ? 0 : self.repositoryListVM.repositoryVMList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
