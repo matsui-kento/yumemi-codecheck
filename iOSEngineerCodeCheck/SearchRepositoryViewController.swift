@@ -8,8 +8,9 @@
 
 import UIKit
 
-class SearchRepositoryViewController: UITableViewController, UISearchBarDelegate {
+class SearchRepositoryViewController: UIViewController, UISearchBarDelegate {
     
+    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     
     var repository: [[String: Any]]=[]
@@ -67,22 +68,26 @@ class SearchRepositoryViewController: UITableViewController, UISearchBarDelegate
         
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    
+    
+}
+
+extension SearchRepositoryViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return repository.count
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
         let rp = repository[indexPath.row]
         cell.textLabel?.text = rp["full_name"] as? String ?? ""
         cell.detailTextLabel?.text = rp["language"] as? String ?? ""
         cell.tag = indexPath.row
         return cell
-        
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // 画面遷移時に呼ばれる
         index = indexPath.row
         performSegue(withIdentifier: "toDetailVC", sender: self)
