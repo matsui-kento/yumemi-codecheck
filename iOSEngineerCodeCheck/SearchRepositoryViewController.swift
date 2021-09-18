@@ -7,11 +7,14 @@
 //
 
 import UIKit
+import RxSwift
 
 class SearchRepositoryViewController: UIViewController, UISearchBarDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
+    private let disposeBag = DisposeBag()
+    private var repositoryListVM: RepositoryListViewModel!
     
     var repository: [[String: Any]]=[]
     
@@ -25,6 +28,25 @@ class SearchRepositoryViewController: UIViewController, UISearchBarDelegate {
         // Do any additional setup after loading the view.
         searchBar.text = "GitHubのリポジトリを検索できるよー"
         searchBar.delegate = self
+    }
+    
+    private func searchRepository(by word: String) {
+        
+        guard let wordEncode = word.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed),
+              let url = URL.urlForGitHubAPI(word: wordEncode) else { return }
+        
+        let resource = Resource<RepositoryList>(url: url)
+        
+        URLRequest.load(resource: resource)
+            .subscribe(onNext: { repositoryList in
+                
+                guard let repositories = repositoryList.items else { return }
+                self.repositoryListVM = RepositoryListViewModel(repositories)
+                
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            }).disposed(by: disposeBag)
     }
     
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
