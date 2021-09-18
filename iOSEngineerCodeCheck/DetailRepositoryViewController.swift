@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
+import SDWebImage
 
 class DetailRepositoryViewController: UIViewController {
     
@@ -18,39 +21,27 @@ class DetailRepositoryViewController: UIViewController {
     @IBOutlet weak var ForkCountLabel: UILabel!
     @IBOutlet weak var issuesCountLabel: UILabel!
     
-    var searchRepositoryVC: SearchRepositoryViewController!
+    var repositoryVM: RepositoryViewModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        let repository = searchRepositoryVC.repository[searchRepositoryVC.index]
-//
-//        languageLabel.text = "Written in \(repository["language"] as? String ?? "")"
-//        starCountLabel.text = "\(repository["stargazers_count"] as? Int ?? 0) stars"
-//        watchCountLabel.text = "\(repository["wachers_count"] as? Int ?? 0) watchers"
-//        ForkCountLabel.text = "\(repository["forks_count"] as? Int ?? 0) forks"
-//        issuesCountLabel.text = "\(repository["open_issues_count"] as? Int ?? 0) open issues"
-//        getavatarImage()
-//
+        setupBindings()
+        
     }
     
-//    func getavatarImage(){
-//        
-//        let repository = searchRepositoryVC.repository[searchRepositoryVC.index]
-//        
-//        fullNameLabel.text = repository["full_name"] as? String
-//        
-//        if let owner = repository["owner"] as? [String: Any] {
-//            if let avatarImageURL = owner["avatar_url"] as? String {
-//                URLSession.shared.dataTask(with: URL(string: avatarImageURL)!) { (data, response, error) in
-//                    let image = UIImage(data: data!)!
-//                    DispatchQueue.main.async {
-//                        self.avatarImageView.image = image
-//                    }
-//                }.resume()
-//            }
-//        }
-//        
-//    }
+    private func setupBindings() {
+        
+        if let repositoryVM = self.repositoryVM {
+            repositoryVM.full_name.bind { self.fullNameLabel.text = $0 }
+            repositoryVM.language.bind { self.languageLabel.text = $0 }
+            repositoryVM.watchers_count.bind { self.watchCountLabel.text = "\($0)" }
+            repositoryVM.stargazers_count.bind { self.starCountLabel.text = "\($0)"  }
+            repositoryVM.forks_count.bind { self.ForkCountLabel.text = "\($0)"  }
+            repositoryVM.open_issues_count.bind { self.issuesCountLabel.text = "\($0)"  }
+            repositoryVM.avatar_url.bind { self.avatarImageView.sd_setImage(with: URL(string: $0), completed: nil) }
+        }
+        
+    }
     
 }
