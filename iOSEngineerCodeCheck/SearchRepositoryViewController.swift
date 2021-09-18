@@ -9,7 +9,7 @@
 import UIKit
 import RxSwift
 
-class SearchRepositoryViewController: UIViewController, UISearchBarDelegate {
+class SearchRepositoryViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
@@ -25,8 +25,7 @@ class SearchRepositoryViewController: UIViewController, UISearchBarDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        searchBar.text = "GitHubのリポジトリを検索できるよー"
+        
         searchBar.delegate = self
     }
     
@@ -49,49 +48,14 @@ class SearchRepositoryViewController: UIViewController, UISearchBarDelegate {
             }).disposed(by: disposeBag)
     }
     
-    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
-        // ↓こうすれば初期のテキストを消せる
-        searchBar.text = ""
-        return true
-    }
-    
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        task?.cancel()
-    }
-    
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        
-        word = searchBar.text!
-        
-        if word.count != 0 {
-            url = "https://api.github.com/search/repositories?q=\(word!)"
-            task = URLSession.shared.dataTask(with: URL(string: url)!) { (data, res, err) in
-                if let obj = try! JSONSerialization.jsonObject(with: data!) as? [String: Any] {
-                    if let items = obj["items"] as? [[String: Any]] {
-                        self.repository = items
-                        DispatchQueue.main.async {
-                            self.tableView.reloadData()
-                        }
-                    }
-                }
-            }
-            // これ呼ばなきゃリストが更新されません
-            task?.resume()
-        }
-        
-    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if segue.identifier == "toDetailVC"{
+        if segue.identifier == "toDetailVC" {
             let detailRepositoryVC = segue.destination as! DetailRepositoryViewController
             detailRepositoryVC.searchRepositoryVC = self
         }
         
     }
-    
-    
-    
 }
 
 extension SearchRepositoryViewController: UITableViewDelegate, UITableViewDataSource {
@@ -116,4 +80,23 @@ extension SearchRepositoryViewController: UITableViewDelegate, UITableViewDataSo
         
     }
     
+}
+
+extension SearchRepositoryViewController: UISearchBarDelegate {
+    
+    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+        // ↓こうすれば初期のテキストを消せる
+        searchBar.text = ""
+        return true
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        
+        guard let word = searchBar.text else { return }
+        
+        if !word.isEmpty {
+            searchRepository(by: word)
+        }
+    }
 }
