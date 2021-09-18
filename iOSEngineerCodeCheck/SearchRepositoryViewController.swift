@@ -46,12 +46,12 @@ class SearchRepositoryViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
         if segue.identifier == "toDetailVC" {
-            let detailRepositoryVC = segue.destination as! DetailRepositoryViewController
-            detailRepositoryVC.searchRepositoryVC = self
+            guard let detailRepositoryVC = segue.destination as? DetailRepositoryViewController,
+                  let indexPath = self.tableView.indexPathForSelectedRow else { return }
+            let repositoryVM = self.repositoryListVM.repositoryAt(indexPath.row)
+            detailRepositoryVC.repositoryVM = repositoryVM
         }
-        
     }
 }
 
