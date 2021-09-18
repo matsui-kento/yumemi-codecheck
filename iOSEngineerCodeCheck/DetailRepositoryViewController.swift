@@ -11,11 +11,8 @@ import UIKit
 class DetailRepositoryViewController: UIViewController {
     
     @IBOutlet weak var avatarImageView: UIImageView!
-    
     @IBOutlet weak var fullNameLabel: UILabel!
-    
     @IBOutlet weak var languageLabel: UILabel!
-    
     @IBOutlet weak var starCountLabel: UILabel!
     @IBOutlet weak var watchCountLabel: UILabel!
     @IBOutlet weak var ForkCountLabel: UILabel!
