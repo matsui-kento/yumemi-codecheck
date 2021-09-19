@@ -1,5 +1,11 @@
 # 株式会社ゆめみ iOS エンジニアコードチェック課題
 
+## 使用しているライブラリ
+### Swift Package Manager
+・[RxSwift](https://github.com/ReactiveX/RxSwift)
+・[RxCocoa](https://github.com/ReactiveX/RxSwift)
+・[SDWebImage](https://github.com/SDWebImage/SDWebImage)
+
 ## 概要
 
 本プロジェクトは株式会社ゆめみ（以下弊社）が、弊社に iOS エンジニアを希望する方に出す課題のベースプロジェクトです。本課題が与えられた方は、下記の概要を詳しく読んだ上で課題を取り組んでください。
