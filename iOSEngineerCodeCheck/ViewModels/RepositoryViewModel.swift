@@ -15,11 +15,13 @@ struct RepositoryListViewModel {
 
 extension RepositoryListViewModel {
     init(_ repositories: [Repository]) {
+        // compactMapでnilになる値を排除して、RepositoryViewModelのリストに変換する
         self.repositoryVMList = repositories.compactMap(RepositoryViewModel.init)
     }
 }
 
 extension RepositoryListViewModel {
+    // RepositoryViewModelのリストから特定のRepositoryViewModelを取り出す。
     func repositoryAt(_ index: Int) -> RepositoryViewModel {
         return self.repositoryVMList[index]
     }
@@ -34,6 +36,7 @@ struct RepositoryViewModel {
     }
 }
 
+// RepositoryViewModel.(変数名)で値を返す
 extension RepositoryViewModel {
     
     var full_name: Observable<String> {

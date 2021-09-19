@@ -26,13 +26,15 @@ class SearchRepositoryViewController: UIViewController {
         tableView.keyboardDismissMode = .onDrag
     }
     
+    // GitHub APIを利用して、リポジトリを検索する
     private func searchRepository(by word: String) {
         
+        // 検索するワードをパーセントエンコードで許可された文字に変換して、URLを作成する。
         guard let wordEncode = word.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed),
               let url = URL.urlForGitHubAPI(word: wordEncode) else { return }
         
+        // GitHub APIで検索してヒットしたリポジトリをRepositoryListViewModelに渡し、tableViewに反映させる
         let resource = Resource<RepositoryList>(url: url)
-        
         URLRequest.load(resource: resource)
             .subscribe(onNext: { repositoryList in
                 
@@ -46,6 +48,8 @@ class SearchRepositoryViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        // DetailRepositoryVCに遷移するときに、選択されたリポジトリの値を渡す
         if segue.identifier == "toDetailVC" {
             guard let detailRepositoryVC = segue.destination as? DetailRepositoryViewController,
                   let indexPath = self.tableView.indexPathForSelectedRow else { return }
@@ -86,7 +90,7 @@ extension SearchRepositoryViewController: UITableViewDelegate, UITableViewDataSo
 extension SearchRepositoryViewController: UISearchBarDelegate {
     
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
-        // ↓こうすれば初期のテキストを消せる
+        // 新しく検索するときに、先に入っている文字を消す
         searchBar.text = ""
         return true
     }
@@ -94,8 +98,8 @@ extension SearchRepositoryViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
         
+        //　空白のみもしくは文字がない場合は、検索しない
         guard let word = searchBar.text else { return }
-        
         if !word.isEmpty {
             searchRepository(by: word)
         }

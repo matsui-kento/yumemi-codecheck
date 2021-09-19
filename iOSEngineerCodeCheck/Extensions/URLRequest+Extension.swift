@@ -17,6 +17,7 @@ struct Resource<T: Decodable> {
 
 extension URLRequest {
     
+    // APIリクエストを送信し、受け取った値をデコードする
     static func load<T>(resource: Resource<T>) -> Observable<T> {
         return Observable.just(resource.url)
             .flatMap { url -> Observable<Data> in
