@@ -127,6 +127,15 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		0E203CB926F71892002072DA /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				BFD945E2244DC5E80012785A /* SearchRepositoryViewController.swift */,
+				BF0A658C244F2A3B00280FA6 /* DetailRepositoryViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
 		BFD945D2244DC5E80012785A = {
 			isa = PBXGroup;
 			children = (
@@ -154,11 +163,10 @@
 				0E203CB026F5D480002072DA /* ViewModels */,
 				0E203CAB26F5D405002072DA /* Models */,
 				0E203CA326F5D18E002072DA /* Extensions */,
-				BFD945DE244DC5E80012785A /* AppDelegate.swift */,
-				BFD945E0244DC5E80012785A /* SceneDelegate.swift */,
-				BFD945E2244DC5E80012785A /* SearchRepositoryViewController.swift */,
-				BF0A658C244F2A3B00280FA6 /* DetailRepositoryViewController.swift */,
+				0E203CB926F71892002072DA /* Controllers */,
 				BFD945E4244DC5E80012785A /* Main.storyboard */,
+				BFD945E0244DC5E80012785A /* SceneDelegate.swift */,
+				BFD945DE244DC5E80012785A /* AppDelegate.swift */,
 				BFD945E7244DC5EB0012785A /* Assets.xcassets */,
 				BFD945E9244DC5EB0012785A /* LaunchScreen.storyboard */,
 				BFD945EC244DC5EB0012785A /* Info.plist */,
