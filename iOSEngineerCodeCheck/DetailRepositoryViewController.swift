@@ -27,11 +27,10 @@ class DetailRepositoryViewController: UIViewController {
         super.viewDidLoad()
         
         setupBindings()
-        
     }
     
+    // 選択されたレポジトリの詳細をUILabelとUIImageViewに反映させる
     private func setupBindings() {
-        
         if let repositoryVM = self.repositoryVM {
             repositoryVM.full_name.bind { self.fullNameLabel.text = $0 }
             repositoryVM.language.bind { self.languageLabel.text = $0 }
@@ -41,7 +40,5 @@ class DetailRepositoryViewController: UIViewController {
             repositoryVM.open_issues_count.bind { self.issuesCountLabel.text = "\($0)"  }
             repositoryVM.avatar_url.bind { self.avatarImageView.sd_setImage(with: URL(string: $0), completed: nil) }
         }
-        
     }
-    
 }

@@ -9,6 +9,7 @@
 import Foundation
 
 extension URL {
+    // searchBarに入力された値を挿入して、GitHub APIに送るURLを作成する
     static func urlForGitHubAPI(word: String) -> URL? {
         return URL(string: "https://api.github.com/search/repositories?q=\(word)")
     }

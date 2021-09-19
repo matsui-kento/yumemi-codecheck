@@ -10,5 +10,7 @@ import Foundation
 import UIKit
 
 class RepositoryTableViewCell: UITableViewCell {
+    
+    // 検索でヒットしたレポジトリのfull_nameを表示するラベル
     @IBOutlet weak var fullNameLabel: UILabel!
 }
