@@ -98,8 +98,11 @@ extension SearchRepositoryViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
         
-        //　空白のみもしくは文字がない場合は、検索しない
-        guard let word = searchBar.text else { return }
+        //　スペースのみもしくは文字がない場合は、検索しない
+        guard var word = searchBar.text else { return }
+        //　文字列中の全てのスペースを削除する
+        word = word.removeWhitespaces
+        
         if !word.isEmpty {
             searchRepository(by: word)
         }
