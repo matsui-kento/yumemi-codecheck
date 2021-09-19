@@ -5,6 +5,7 @@
 ・[RxSwift](https://github.com/ReactiveX/RxSwift)
 ・[RxCocoa](https://github.com/ReactiveX/RxSwift)
 ・[SDWebImage](https://github.com/SDWebImage/SDWebImage)
+・[MBProgressHUD](https://github.com/jdg/MBProgressHUD)
 
 ## 概要
 
