@@ -9,6 +9,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import MBProgressHUD
 
 class SearchRepositoryViewController: UIViewController {
     
@@ -29,6 +30,7 @@ class SearchRepositoryViewController: UIViewController {
     // GitHub APIを利用して、リポジトリを検索する
     private func searchRepository(by word: String) {
         
+        MBProgressHUD.showAdded(to: self.view, animated: true)
         // 検索するワードをパーセントエンコードで許可された文字に変換して、URLを作成する。
         guard let wordEncode = word.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed),
               let url = URL.urlForGitHubAPI(word: wordEncode) else { return }
@@ -43,6 +45,7 @@ class SearchRepositoryViewController: UIViewController {
                 
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
+                    MBProgressHUD.hide(for: self.view, animated: true)
                 }
             }).disposed(by: disposeBag)
     }
