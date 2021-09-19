@@ -16,6 +16,7 @@
 		0E203CB526F5DE61002072DA /* RepositoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E203CB426F5DE61002072DA /* RepositoryTableViewCell.swift */; };
 		0E203CB826F64053002072DA /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 0E203CB726F64053002072DA /* SDWebImage */; };
 		0E203CBB26F71C26002072DA /* StringProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E203CBA26F71C26002072DA /* StringProtocol.swift */; };
+		0E203CBE26F73228002072DA /* MBProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 0E203CBD26F73228002072DA /* MBProgressHUD */; };
 		BF0A658D244F2A3B00280FA6 /* DetailRepositoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0A658C244F2A3B00280FA6 /* DetailRepositoryViewController.swift */; };
 		BFD945DF244DC5E80012785A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD945DE244DC5E80012785A /* AppDelegate.swift */; };
 		BFD945E1244DC5E80012785A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD945E0244DC5E80012785A /* SceneDelegate.swift */; };
@@ -75,6 +76,7 @@
 			files = (
 				0E203CB826F64053002072DA /* SDWebImage in Frameworks */,
 				0E203CAA26F5D203002072DA /* RxSwift in Frameworks */,
+				0E203CBE26F73228002072DA /* MBProgressHUD in Frameworks */,
 				0E203CA826F5D203002072DA /* RxCocoa in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -215,6 +217,7 @@
 				0E203CA726F5D203002072DA /* RxCocoa */,
 				0E203CA926F5D203002072DA /* RxSwift */,
 				0E203CB726F64053002072DA /* SDWebImage */,
+				0E203CBD26F73228002072DA /* MBProgressHUD */,
 			);
 			productName = iOSEngineerCodeCheck;
 			productReference = BFD945DB244DC5E80012785A /* iOSEngineerCodeCheck.app */;
@@ -291,6 +294,7 @@
 			packageReferences = (
 				0E203CA626F5D203002072DA /* XCRemoteSwiftPackageReference "RxSwift" */,
 				0E203CB626F64053002072DA /* XCRemoteSwiftPackageReference "SDWebImage" */,
+				0E203CBC26F73228002072DA /* XCRemoteSwiftPackageReference "MBProgressHUD" */,
 			);
 			productRefGroup = BFD945DC244DC5E80012785A /* Products */;
 			projectDirPath = "";
@@ -691,6 +695,14 @@
 				minimumVersion = 5.11.1;
 			};
 		};
+		0E203CBC26F73228002072DA /* XCRemoteSwiftPackageReference "MBProgressHUD" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/jdg/MBProgressHUD";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -708,6 +720,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 0E203CB626F64053002072DA /* XCRemoteSwiftPackageReference "SDWebImage" */;
 			productName = SDWebImage;
+		};
+		0E203CBD26F73228002072DA /* MBProgressHUD */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0E203CBC26F73228002072DA /* XCRemoteSwiftPackageReference "MBProgressHUD" */;
+			productName = MBProgressHUD;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
